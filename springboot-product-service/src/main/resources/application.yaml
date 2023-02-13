@@ -1,0 +1,23 @@
+resilience4j:
+  circuitbreaker:
+    instances:
+      rest-call-coupon-service-cb:
+        register-health-indicator: true
+        sliding-window-type: count-based
+        sliding-window-size: 5
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 60
+        slow-call-rate-threshold: 60
+        slow-call-duration-threshold: 10s
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+      
+  retry:
+    instances:
+      coupon-service-retry:
+        max-attempts: 5
+        wait-duration: 3s
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+      
+      
